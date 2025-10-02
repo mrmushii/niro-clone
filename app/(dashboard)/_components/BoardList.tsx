@@ -1,5 +1,9 @@
 "use client"
 
+import EmptyBoard from "./EmptyBoard";
+import EmptyFav from "./EmptyFav";
+import EmptySearch from "./EmptySearch";
+
 interface BoardListProps {
   orgId: string;
   query: {
@@ -13,24 +17,18 @@ const BoardList = ({orgId,query}:BoardListProps) => {
 
   if(!data.length&& query.search){
     return(
-      <div>
-        try searching for something else
-      </div>
+      <EmptySearch/>
     )
   }
   if(!data?.length && query.favorites){
     return(
-      <div>
-        no favorites
-      </div>
+      <EmptyFav/>
     )
   }
 
   if(!data?.length){
     return(
-      <div>
-        no boards at all
-      </div>
+     <EmptyBoard/>
     )
   }
 
