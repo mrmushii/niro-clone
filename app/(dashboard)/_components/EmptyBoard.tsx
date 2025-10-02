@@ -1,8 +1,26 @@
+"use client"
+import { useOrganization } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import {api} from "@/convex/_generated/api"
+
+import { useApiMutation } from "@/hooks/use-api-mutation"
+
 
 
 const EmptyBoard = () => {
+  const {organization} = useOrganization()
+  const {mutate,pending} = useApiMutation( api.board.create)
+
+  const onClick = () =>{
+    if(!organization) return
+
+    mutate({
+      orgId: organization.id,
+      title: "untitled"
+    })
+  }
+
   return (
     <div className="h-full flex flex-col items-center justify-center">
       <Image src={'/note.svg'} height={110} width={110} alt="empty"/>
@@ -12,7 +30,7 @@ const EmptyBoard = () => {
         Start by creating a Niro for your organization
       </p>
       <div>
-        <Button size={'lg'} className="mt-6">
+        <Button disabled={pending} onClick={onClick} size={'lg'} className="mt-6">
             Create Niro
         </Button>
       </div>

@@ -3,7 +3,7 @@ import {defineSchema, defineTable} from "convex/server"
 
 export default defineSchema({
   board: defineTable({
-    titie: v.string(),
+    title: v.string(),
     orgId: v.string(),
     authorId: v.string(),
     authorName: v.string(),
@@ -11,7 +11,7 @@ export default defineSchema({
   })
     .index("by_org",["orgId"])
     .searchIndex("search_title",{
-      searchField:"titie",
+      searchField:"title",
       filterFields: ["orgId"]
     })
 })
