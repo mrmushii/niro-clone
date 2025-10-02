@@ -2,6 +2,12 @@
 
 "use client"
 
+import Image from "next/image";
+import Link from "next/link";
+import Overlay from "./Overlay";
+import { FormatDistanceFn, formatDistanceToNow } from "date-fns";
+import { useAuth } from "@clerk/nextjs";
+import Footer from "./Footer";
 interface BoardCardProps{
   id:string;
   title:string;
@@ -17,8 +23,29 @@ interface BoardCardProps{
 const BoardCard = (
   {id,title,authorId,authorName,createdAt,imageUrl,orgId,isFavorite}:BoardCardProps
 ) => {
+  const { userId } = useAuth()
+  const authorLabel = userId === authorId ? "You" : authorName
+  const createdAtLabel = formatDistanceToNow(createdAt,{
+    addSuffix: true
+  })
+
   return (
-    <div>BoardCard</div>
+    <Link href={`/board/${id}`}>
+    <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
+        <div className="relative flex-1 bg-amber-50">
+          <Image src={imageUrl} alt="doodle" fill className="object-fill"/>
+          <Overlay/>
+        </div>
+        <Footer 
+          isFavorite={isFavorite}
+          title={title}
+          authorLabel={authorLabel}
+          createdAtLabel={createdAtLabel}
+          onClick={()=>{}}
+          disabled={false}
+        />
+    </div>
+    </Link>
   )
 }
 
