@@ -5,6 +5,7 @@ import Image from "next/image"
 import {api} from "@/convex/_generated/api"
 
 import { useApiMutation } from "@/hooks/use-api-mutation"
+import { toast } from "sonner"
 
 
 
@@ -19,6 +20,10 @@ const EmptyBoard = () => {
       orgId: organization.id,
       title: "untitled"
     })
+    .then((id)=>{
+      toast.success("Niro Created")
+    })
+    .catch(()=> toast.error("Failed to create Niro"))
   }
 
   return (
