@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
-import { Overlay } from "./overlay";
+
 import { useAuth } from "@clerk/nextjs";
 import { Footer } from "./footer";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,6 +12,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { Overlay } from "./overlay";
 
 interface BoardCardProps {
     id: string;
